@@ -1,0 +1,11 @@
+# test
+version: '3.8'
+services:
+  proxy:
+    image: noise131/haproxy:v2.5-alpine
+    restart: always
+    ports:
+      - 80:80
+    networks_mode: host
+    volumes:
+      - /docker_volume/haproxy:/etc/haproxy:ro
