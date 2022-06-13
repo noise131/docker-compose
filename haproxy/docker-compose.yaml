@@ -8,3 +8,5 @@ services:
     # ports:
     #   - 9999:9999
     network_mode: host
+    ulimits: 
+      nofile: 100000
