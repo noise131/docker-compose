@@ -3,7 +3,7 @@ version: '3.8'
 services:
   proxy:
     build: .
-    # image: noi1031/haproxy:2.5-alpine
+    image: haproxy:2.5-edit_Config
     restart: always
     # ports:
     #   - 9999:9999
