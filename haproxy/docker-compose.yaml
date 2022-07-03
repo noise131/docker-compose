@@ -2,9 +2,12 @@
 version: '3.8'
 services:
   proxy:
-    build: .
-    image: haproxy:2.5-edit_Config
+    # build: .
+    # image: haproxy:2.5-edit_config_compose
+    image: docker.io/noi1031/haproxy:2.5-alpine
     restart: always
+    volumes:
+      - /container_volume/haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg:ro
     # ports:
     #   - 9999:9999
     network_mode: host
