@@ -1,4 +1,6 @@
-.vscode
+# vscode 文件
 *.code-workspace
+.vscode
 
+# 测试文件
 *test*
