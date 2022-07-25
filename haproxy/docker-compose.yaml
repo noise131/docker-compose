@@ -7,9 +7,7 @@ services:
     image: docker.io/noi1031/haproxy:2.5-alpine
     restart: always
     volumes:
-      - /container_volume/haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg:ro
-    # ports:
-    #   - 9999:9999
+      - ./haproxy.cfg:/etc/haproxy/haproxy.cfg:ro
     network_mode: host
     ulimits: 
       nofile: 100000

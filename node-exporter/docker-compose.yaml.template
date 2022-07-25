@@ -4,6 +4,7 @@ services:
     image: prom/node-exporter:v1.3.1
     restart: always
     command: --path.rootfs=/host
+    hostname: ${hostname}
     # network_mode: host
     ports:
       - 9100:9100

@@ -1,0 +1,15 @@
+---
+version: '3.8'
+services:
+  # 不写镜像名默认为 : build_服务名:latest (build_alpine1:latest)
+  alpine1:
+    build: alpine
+  # 指定镜像名但不指定 tag : 镜像名:latest (alpine-build:latest)
+  alpine2:
+    build: alpine
+    image: alpine-build
+  # 指定镜像名和 tag : 最终生成镜像名为自己设置的镜像名和 tag (alpine:3.15-build)
+  alpine3:
+    build: alpine
+    image: alpine:3.15-build
+...

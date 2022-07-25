@@ -1,0 +1,23 @@
+---
+version: '3.8'
+services:
+  influxdb:
+    build: influxdb
+    image: influxdb:1.8.10-alpine-duration
+    restart: always
+    environment:
+      INFLUXDB_DB: prometheus
+      INFLUXDB_ADMIN_USER: influxdb
+      INFLUXDB_ADMIN_PASSWORD: influxdb.123
+      INFLUXDB_HTTP_AUTH_ENABLED: 'true'
+      # 自定义参数, 数据库过期策略
+      INFLUXDB_DURATION: 30d
+      INFLUXDB_SHARD_DURATION: 1d
+    ports:
+      - 8086:8086
+    volumes:
+      - /docker_volumes/influxdb:/var/lib/influxdb
+  # 数据库初始化选择了重打镜像的方式进行初始化
+  # influxdb-init:
+  #   build: influxdb-init
+...

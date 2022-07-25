@@ -1,0 +1,36 @@
+---
+version: '3.8'
+services:
+  influxdb:
+    build: dockerfile_influxdb
+    image: influxdb:1.8.10-alpine-duration
+    restart: always
+    environment:
+      INFLUXDB_DB: prometheus
+      INFLUXDB_ADMIN_USER: influxdb
+      INFLUXDB_ADMIN_PASSWORD: influxdb.123
+      INFLUXDB_HTTP_AUTH_ENABLED: 'true'
+      # 自定义参数, 数据库过期策略
+      INFLUXDB_DURATION: 30d
+      INFLUXDB_SHARD_DURATION: 1d
+    volumes:
+      - /containers_volume/influxdb:/var/lib/influxdb
+    ports:
+      - 127.0.0.1:8086:8086
+  grafana:
+    image: grafana/grafana:8.5.9
+    restart: always
+    ports:
+      - 3000:3000
+  prometheus:
+    depends_on:
+      - influxdb
+    image: prom/prometheus:v2.37.0
+    restart: always
+    volumes:
+      # - /containers_volume/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      # - /containers_volume/prometheus/file_sd:/etc/prometheus/file_sd
+      - /containers_volume/prometheus:/etc/prometheus
+    ports:
+      - 9090:9090
+...
