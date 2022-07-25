@@ -1,0 +1,18 @@
+---
+version: '3.8'
+services:
+  nginx:
+    image: noi1031/nginx-hostname-test:1.20.1
+    restart: always
+    # ports:
+    #   - 80:80
+    deploy:
+      # 端点访问模式在 swarm 中生效，单点部署只能使用 dnsrr
+      # endpoint_mode: dnsrr | vip
+      replicas: 3
+# 测试以上服务副本的容器, 在该容器中访问 nginx 服务名时 (可以使用:ping nginx) 为轮询模式 (dnsrr) 访问 nginx 副本
+  alpine:
+    image: alpine:3.15
+    entrypoint: tail -f /dev/null
+    restart: always
+...

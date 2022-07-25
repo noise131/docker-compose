@@ -1,0 +1,19 @@
+---
+version: '3.8'
+services:
+  filebeat:
+    image: elastic/filebeat:7.15.2
+    restart: always
+    volumes:
+      - ./filebeat.yaml:/usr/share/filebeat/filebeat.yml:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+    # 如果网络收集需要开放很多端口可以使用 host 网络模式
+    # network_mode: host
+    ports:
+      - 5000:5000
+      - 5100:5100
+...

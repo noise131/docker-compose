@@ -1,7 +1,16 @@
 ---
 version: '3.8'
 services:
+  node-exporter:
+    image: prom/node-exporter:v1.3.1
+    restart: always
+    ports:
+      - 9100:9100
   prometheus:
+    depends_on:
+      - node-exporter
+      - influxdb
     image: prom/prometheus:v2.37.0
     restart: always
+  
 ...

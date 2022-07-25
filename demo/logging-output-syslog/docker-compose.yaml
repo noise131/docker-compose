@@ -1,0 +1,27 @@
+---
+version: '3.8'
+services:
+  filebeat: 
+    image: elastic/filebeat:7.15.2
+    restart: always
+    volumes:
+      - ./filebeat.yaml:/usr/share/filebeat/filebeat.yml:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+    ports:
+      - 127.0.0.1:5100:5100
+  nginx:
+    depends_on:
+      - filebeat
+    image: nginx:1.20.1
+    restart: always
+    ports:
+      - 80:80
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://localhost:5100"
+...

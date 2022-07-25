@@ -6,6 +6,7 @@ services:
     restart: always
     environment:
       DATA_SOURCE_NAME: monitor:monitor.123@(127.0.0.1:3306)/mysql
+    # 容器内部需要与外部 mysql 通信, 使用 host 网络模式比较方便
     network_mode: host
     # ports:
     #   - 9104:9104

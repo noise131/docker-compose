@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+
+rule_files:
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: 
+        - localhost:9090
+  - job_name: "node"
+    file_sd_configs:
+      - files: 
+        - file_sd/node.yaml
+  - job_name: "mysql"
+    file_sd_configs:
+      - files: 
+        - file_sd/mysql.yaml
